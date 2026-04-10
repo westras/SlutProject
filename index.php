@@ -23,14 +23,8 @@
 
             <div class="lefttopmain"> 
 
-                <textarea placeholder="groupsnames.." name="groups" id="GROUPS">
-
-                </textarea>
-            
-                <textarea placeholder="Names..." name="names" id="NAMES">
-
-                </textarea>
-
+                <textarea placeholder="groupsnames.." name="groups" id="GROUPS"></textarea>
+                <textarea placeholder="Names..." name="names" id="NAMES"></textarea>
                 <input type="number" id="numberOfGroups" name="numberOfGroups" min="1" max="100">
 
             </div>
