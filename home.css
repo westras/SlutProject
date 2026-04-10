@@ -24,10 +24,10 @@ body{
     padding: 0 20px;
 }
 
-.nav-links {
-    position: fixed;
+/*.nav-links {
+    position: absolute;
     width: 100%;
-    top: 0;
+    top: 120px;
     left: 0;
     display: flex;
     justify-content: center;
@@ -48,6 +48,7 @@ body{
 .nav-links a:hover {
     color: #0acaff; 
 }
+/*/
 
 img {
     width: 100%;

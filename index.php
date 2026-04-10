@@ -11,12 +11,9 @@
     <section class="navbar">
 
         <div class="titel">
-            <img src="Pictures/GROUPGENERATORRRRR" type="image/png" alt="Logo">
+            <img src="Pictures/GROUPGENERATORRRRR.png" alt="Logo">
         </div>
 
-        <div class="nav-links">
-            <a href="#">Home</a>
-        </div>
 
     </section>
 
