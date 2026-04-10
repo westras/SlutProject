@@ -20,15 +20,22 @@
     <section class="main">
         
         <div class="topmain">
-        
-            <textarea placeholder="Names..." name="names" id="NAMES">
 
-            </textarea>
+            <div class="lefttopmain> 
+            
+                <textarea placeholder="Names..." name="names" id="NAMES">
 
-            <div class="enteredNames">
-                
+                </textarea>
+
             </div>
 
+            <div class="righttopmain">
+
+                <div class="enteredNames">
+                    
+                </div>
+                
+            </div>
         </div>
 
         <div class="botmain">
