@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $servername = "localhost";
         $username = "root"; // Default XAMPP user
         $password = ""; // Default XAMPP password
-        $dbname = "slumpgrubb";
+        $dbname = "slumpgrupp";
         
         $conn = new mysqli($servername, $username, $password, $dbname);
         

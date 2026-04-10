@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Load existing names from database
+    fetch('get_names.php')
+        .then(response => response.json())
+        .then(names => {
+            const enteredNamesDiv = document.querySelector('.enteredNames');
+            names.forEach(name => {
+                const nameDiv = document.createElement('div');
+                nameDiv.textContent = name;
+                enteredNamesDiv.appendChild(nameDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading names:', error);
+        });
+
     document.getElementById("NAMES").addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
             event.preventDefault();
