@@ -21,7 +21,7 @@
         
         <div class="topmain">
 
-            <div class="lefttopmain> 
+            <div class="lefttopmain"> 
 
                 <textarea placeholder="groupsnames.." name="groups" id="GROUPS">
 
