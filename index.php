@@ -23,7 +23,7 @@
 
             <div class="lefttopmain> 
 
-                <textarea placeholder="GroupName..." name="groups" id="GROUPS">
+                <textarea placeholder="groupsnames.." name="groups" id="GROUPS">
 
                 </textarea>
             
