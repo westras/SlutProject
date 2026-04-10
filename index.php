@@ -11,7 +11,7 @@
     <section class="navbar">
 
         <div class="titel">
-            <img src="Pictures/GROUPGENERATORRRRR" alt="">
+            <img src="Pictures/GROUPGENERATORRRRR" type="image/png" alt="Logo">
         </div>
 
         <div class="nav-links">
