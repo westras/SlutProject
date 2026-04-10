@@ -13,3 +13,28 @@ body{
     display: flex;
     flex-direction: column;
 }
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    background: rgba(18, 18, 18, 0.8); 
+    z-index: 1000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.navbar a {
+    color: #eaeaea; 
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #0acaff; 
+}
