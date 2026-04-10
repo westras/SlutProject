@@ -162,6 +162,7 @@ textarea, input[type="number"] {
 
 .enteredNames {
     width: 100%;
+    max-width: 570px;
     flex: 1;
     min-height: 0;
     padding: 10px;
@@ -171,6 +172,8 @@ textarea, input[type="number"] {
     background-color: #F4F7FA;
     color: #000000;
     border: 2px solid #000000;
+    overflow-x: scroll;
+    scrollbar-width: none;
 }
 
 #numberOfGroups {
