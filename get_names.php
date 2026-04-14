@@ -1,28 +1,30 @@
 <?php
-header('Content-Type: application/json');
+session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "slumpgrupp";
+$class_id = $_GET['class_id'] ?? null;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+if (!$class_id) {
+    echo json_encode([]);
+    exit();
+}
+
+$conn = new mysqli("localhost", "root", "", "slumpgrupp");
 
 if ($conn->connect_error) {
     echo json_encode([]);
     exit();
 }
 
-$result = $conn->query("SELECT name FROM personer ORDER BY id ASC");
+$stmt = $conn->prepare("SELECT name FROM students WHERE class_id=? ORDER BY id ASC");
+$stmt->bind_param("i", $class_id);
+$stmt->execute();
+
+$result = $stmt->get_result();
 
 $names = [];
 
-if ($result) {
-    while ($row = $result->fetch_assoc()) {
-        $names[] = $row['name'];
-    }
+while ($row = $result->fetch_assoc()) {
+    $names[] = $row["name"];
 }
-
-$conn->close();
 
 echo json_encode($names);

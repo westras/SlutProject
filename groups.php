@@ -37,28 +37,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const groups = JSON.parse(sessionStorage.getItem("groups") || "[]");
 
-    if (groups.length === 0) {
-        container.innerHTML = "<p>No groups generated</p>";
+    if (!groups.length) {
+        container.innerHTML = "<div style='color:#000'>No groups generated</div>";
         return;
     }
 
     groups.forEach((group, index) => {
 
         const box = document.createElement("div");
+
         box.style.flex = "1";
         box.style.background = "#F4F7FA";
         box.style.border = "2px solid #000";
         box.style.borderRadius = "10px";
         box.style.padding = "10px";
         box.style.color = "#000";
+        box.style.minWidth = "150px";
 
-        let html = `<h3>Group ${index + 1}</h3>`;
+        const title = document.createElement("h3");
+        title.textContent = "Group " + (index + 1);
+
+        box.appendChild(title);
 
         group.forEach(name => {
-            html += `<div>${name}</div>`;
+            const div = document.createElement("div");
+            div.textContent = name;
+            box.appendChild(div);
         });
-
-        box.innerHTML = html;
 
         container.appendChild(box);
     });
