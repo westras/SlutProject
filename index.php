@@ -46,8 +46,6 @@ session_start();
 
         <div class="lefttopmain">
 
-            <textarea placeholder="Class name..." id="GROUPS"></textarea>
-
             <textarea placeholder="Students..." id="NAMES"></textarea>
 
             <input type="number" id="numberOfGroups" min="1" max="100">
