@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,14 +14,15 @@ if ($conn->connect_error) {
 }
 
 $result = $conn->query("SELECT name FROM personer ORDER BY id ASC");
+
 $names = [];
 
-while ($row = $result->fetch_assoc()) {
-    $names[] = $row['name'];
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $names[] = $row['name'];
+    }
 }
 
 $conn->close();
 
-header('Content-Type: application/json');
 echo json_encode($names);
-?>

@@ -92,6 +92,7 @@ input[type="number"] {
     color: #000;
     border: 2px solid #000;
     resize: none;
+    z-index: 9999;
 }
 
 #NAMES {
@@ -102,6 +103,7 @@ input[type="number"] {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    color: #000;
 }
 
 button {

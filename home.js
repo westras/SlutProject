@@ -1,71 +1,85 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
+
+    const input = document.getElementById("NAMES");
+    const enteredNamesDiv = document.querySelector(".enteredNames");
+    const generateBtn = document.getElementById("generateBtn");
+
+    if (!input || !enteredNamesDiv) {
+        console.error("Missing required DOM elements");
+        return;
+    }
+
     // Load existing names from database
-    fetch('get_names.php')
+    fetch("get_names.php")
         .then(response => response.json())
         .then(names => {
-            const enteredNamesDiv = document.querySelector('.enteredNames');
+
+            if (!Array.isArray(names)) return;
+
             names.forEach(name => {
-                const nameDiv = document.createElement('div');
-                nameDiv.textContent = name;
-                enteredNamesDiv.appendChild(nameDiv);
+                const div = document.createElement("div");
+                div.textContent = name;
+                enteredNamesDiv.appendChild(div);
             });
+
         })
-        .catch(error => {
-            console.error('Error loading names:', error);
+        .catch(err => {
+            console.error("get_names.php failed:", err);
         });
 
-    document.getElementById("NAMES").addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            const name = this.value.trim();
-            if (name) {
-                // Add to enteredNames
-                const enteredNamesDiv = document.querySelector('.enteredNames');
-                const nameDiv = document.createElement('div');
-                nameDiv.textContent = name;
-                enteredNamesDiv.appendChild(nameDiv);
-                
-                // Send to server
-                fetch('insert.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'name=' + encodeURIComponent(name)
-                })
-                .then(response => response.text())
-                .then(data => {
-                    console.log('Saved:', data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-                
-                // Clear the textarea
-                this.value = '';
-            }
-        }
-    });
-    document.getElementById("generateBtn").addEventListener("click", function () {
+    // Add names on Enter
+    input.addEventListener("keydown", function (event) {
 
-    const nameElements = document.querySelectorAll(".enteredNames div");
+        if (event.key !== "Enter") return;
 
-    let names = Array.from(nameElements).map(el => el.textContent);
+        event.preventDefault();
 
-    const groupCount = parseInt(document.getElementById("numberOfGroups").value);
+        const name = this.value.trim();
+        if (!name) return;
 
-    if (!groupCount || names.length === 0) return;
+        const div = document.createElement("div");
+        div.textContent = name;
+        enteredNamesDiv.appendChild(div);
 
-    names.sort(() => Math.random() - 0.5);
+        fetch("insert.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "name=" + encodeURIComponent(name)
+        })
+        .then(res => res.text())
+        .then(data => console.log("Saved:", data))
+        .catch(err => console.error("insert.php failed:", err));
 
-    let groups = Array.from({ length: groupCount }, () => []);
-
-    names.forEach((name, index) => {
-        groups[index % groupCount].push(name);
+        this.value = "";
     });
 
-    sessionStorage.setItem("groups", JSON.stringify(groups));
+    // Generate groups
+    if (generateBtn) {
 
-    window.location.href = "groups.php";
-});
+        generateBtn.addEventListener("click", function () {
+
+            const nameElements = document.querySelectorAll(".enteredNames div");
+            let names = Array.from(nameElements).map(el => el.textContent);
+
+            const groupCount = parseInt(document.getElementById("numberOfGroups").value);
+
+            if (!groupCount || names.length === 0) return;
+
+            names.sort(() => Math.random() - 0.5);
+
+            let groups = Array.from({ length: groupCount }, () => []);
+
+            names.forEach((name, index) => {
+                groups[index % groupCount].push(name);
+            });
+
+            sessionStorage.setItem("groups", JSON.stringify(groups));
+
+            window.location.href = "groups.php";
+        });
+
+    }
+
 });
