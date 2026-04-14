@@ -1,52 +1,70 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LandingPageOFDOOM</title>
+    <title>Group Generator</title>
+
     <link rel="stylesheet" href="home.css">
-    <script src="home.js"></script>
+    <script src="home.js" defer></script>
 </head>
+
 <body>
-    
-    <section class="navbar">
 
-        <div class="titel">
-            <img src="Pictures/GROUPGENERATORRRRR.png" alt="Logo">
+<section class="navbar">
+
+    <div class="titel">
+        <img src="Pictures/GROUPGENERATORRRRR.png" alt="Logo">
+    </div>
+
+    <div class="nav-buttons">
+
+        <?php if (!isset($_SESSION["user_id"])): ?>
+            <a href="login.php">
+                <button>Login</button>
+            </a>
+        <?php else: ?>
+            <a href="dashboard.php">
+                <button>My Classes</button>
+            </a>
+
+            <a href="logout.php">
+                <button>Logout</button>
+            </a>
+        <?php endif; ?>
+
+    </div>
+
+</section>
+
+<section class="main">
+
+    <div class="topmain">
+
+        <div class="lefttopmain">
+
+            <textarea placeholder="Class name..." id="GROUPS"></textarea>
+
+            <textarea placeholder="Students..." id="NAMES"></textarea>
+
+            <input type="number" id="numberOfGroups" min="1" max="100">
+
+            <button id="saveClassBtn">Create / Save Class</button>
+
         </div>
 
+        <div class="righttopmain">
 
-    </section>
-
-    <section class="main">
-        
-        <div class="topmain">
-
-            <div class="lefttopmain"> 
-
-                <textarea placeholder="groupsnames.." name="groups" id="GROUPS"></textarea>
-                <textarea placeholder="Names..." name="names" id="NAMES"></textarea>
-                <input type="number" id="numberOfGroups" name="numberOfGroups" min="1" max="100">
-
-            </div>
-
-            <div class="righttopmain">
-
-                <div class="enteredNames">
-                    
-                </div>
-
-            </div>
-        </div>
-
-        <div class="botmain">
-
-            <button> </button>
+            <div class="enteredNames"></div>
 
         </div>
 
-    </section>
+    </div>
 
+</section>
 
 </body>
 </html>
