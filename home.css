@@ -93,10 +93,6 @@ input[type="number"] {
     resize: none;
 }
 
-#GROUPS {
-    min-height: 60px;
-}
-
 #NAMES {
     min-height: 140px;
 }
