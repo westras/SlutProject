@@ -50,7 +50,7 @@ session_start();
 
             <input type="number" id="numberOfGroups" min="1" max="100">
 
-            <button id="saveClassBtn">Create / Save Class</button>
+            <button id="generateBtn">Generate Groups</button>
 
         </div>
 

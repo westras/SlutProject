@@ -46,4 +46,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    document.getElementById("generateBtn").addEventListener("click", function () {
+
+    const nameElements = document.querySelectorAll(".enteredNames div");
+
+    let names = Array.from(nameElements).map(el => el.textContent);
+
+    const groupCount = parseInt(document.getElementById("numberOfGroups").value);
+
+    if (!groupCount || names.length === 0) return;
+
+    names.sort(() => Math.random() - 0.5);
+
+    let groups = Array.from({ length: groupCount }, () => []);
+
+    names.forEach((name, index) => {
+        groups[index % groupCount].push(name);
+    });
+
+    sessionStorage.setItem("groups", JSON.stringify(groups));
+
+    window.location.href = "groups.php";
+});
 });
