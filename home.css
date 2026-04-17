@@ -151,3 +151,33 @@ button:hover {
     border: 2px solid #000;
     height: 40px;
 }
+
+/*/ för registrering php filen/*/
+
+.form-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box {
+    background: #E6EDF2;
+    color: black;
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid black;
+    width: 300px;
+    z-index: 2;
+}
+
+.form-box input {
+    width: 100%;
+    margin-bottom: 10px;
+    z-index: 2;
+}
+
+.link-text {
+    margin-top: 10px;
+    font-size: 14px;
+}

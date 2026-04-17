@@ -88,6 +88,9 @@ a {
     <button type="submit">Create Class</button>
 </form>
 
+<a href="logout.php">
+    <button>Logout</button>
+</a>
 </div>
 
 </body>

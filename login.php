@@ -74,6 +74,16 @@ if (isset($error)) {
 Login
 </button>
 
+<p>
+
+No account?
+
+<a href="registration.php">
+Create one
+</a>
+
+</p>
+
 </form>
 
 </div>
