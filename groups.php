@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="home.css">
 <script src="group.js" defer></script>
+
 </head>
 
 <body>
@@ -25,10 +26,10 @@
 
 <section class="main">
 
-    <div class="topmain" id="groupsContainer"></div>
+    <div class="topmain groups-layout" id="groupsContainer">
+    </div>
 
 </section>
-
 
 </body>
 </html>

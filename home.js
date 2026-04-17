@@ -6,14 +6,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const enteredNamesDiv = document.querySelector('.enteredNames');
     const textarea = document.getElementById("NAMES");
     const generateBtn = document.getElementById("generateBtn");
+    const groupInput = document.getElementById("numberOfGroups");
 
     if (!enteredNamesDiv || !textarea || !generateBtn) return;
 
-    // only load if class exists
     if (classId) {
         fetch('get_names.php?class_id=' + classId)
             .then(r => r.json())
             .then(names => {
+
                 enteredNamesDiv.innerHTML = "";
 
                 names.forEach(name => {
@@ -21,6 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     div.textContent = name;
                     enteredNamesDiv.appendChild(div);
                 });
+
+                // optional: auto-limit groups after load
+                if (groupInput) {
+                    groupInput.max = names.length;
+                }
+
             })
             .catch(err => console.error(err));
     }
@@ -43,6 +50,15 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             this.value = '';
+
+            // update max dynamically when adding students
+            if (groupInput) {
+                const count = document.querySelectorAll(".enteredNames div").length;
+                groupInput.max = count;
+                if (parseInt(groupInput.value) > count) {
+                    groupInput.value = count;
+                }
+            }
         }
     });
 
@@ -51,9 +67,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const nameElements = document.querySelectorAll(".enteredNames div");
         let names = Array.from(nameElements).map(el => el.textContent);
 
-        const groupCount = parseInt(document.getElementById("numberOfGroups").value);
+        let groupCount = parseInt(groupInput.value);
 
         if (!groupCount || names.length === 0) return;
+
+        // LIMIT: max groups = number of students
+        if (groupCount > names.length) {
+            groupCount = names.length;
+            groupInput.value = names.length;
+        }
 
         names.sort(() => Math.random() - 0.5);
 

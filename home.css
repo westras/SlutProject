@@ -181,3 +181,60 @@ button:hover {
     margin-top: 10px;
     font-size: 14px;
 }
+
+/*/group/*/
+
+.groups-layout {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-content: flex-start;
+
+    gap: 20px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    height: 100%;
+}
+
+.groupBox {
+
+    flex: 0 0 calc(33.33% - 14px);
+
+    background: #F4F7FA;
+
+    border: 2px solid #000;
+
+    border-radius: 10px;
+
+    padding: 10px;
+
+    color: #000;
+
+    min-width: 200px;
+
+}
+
+/* Responsive layout */
+
+@media (max-width: 900px) {
+
+    .groupBox {
+
+        flex: 0 0 calc(50% - 14px);
+
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .groupBox {
+
+        flex: 0 0 100%;
+
+    }
+
+}
