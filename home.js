@@ -216,8 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-            window.location.href =
-                "group.php";
+            window.location.href = "groups.php";
 
         });
 
