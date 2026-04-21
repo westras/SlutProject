@@ -3,91 +3,222 @@ document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     const classId = params.get("class_id");
 
-    const enteredNamesDiv = document.querySelector('.enteredNames');
-    const textarea = document.getElementById("NAMES");
-    const generateBtn = document.getElementById("generateBtn");
-    const groupInput = document.getElementById("numberOfGroups");
+    const enteredNamesDiv =
+        document.querySelector('.enteredNames');
+
+    const textarea =
+        document.getElementById("NAMES");
+
+    const generateBtn =
+        document.getElementById("generateBtn");
+
+    const groupInput =
+        document.getElementById("numberOfGroups");
 
     if (!enteredNamesDiv || !textarea || !generateBtn) return;
 
-    if (classId) {
-        fetch('get_names.php?class_id=' + classId)
-            .then(r => r.json())
-            .then(names => {
 
-                enteredNamesDiv.innerHTML = "";
 
-                names.forEach(name => {
-                    const div = document.createElement('div');
-                    div.textContent = name;
-                    enteredNamesDiv.appendChild(div);
-                });
+    function createStudentElement(name, id) {
 
-                // optional: auto-limit groups after load
-                if (groupInput) {
-                    groupInput.max = names.length;
-                }
+        const div =
+            document.createElement('div');
 
-            })
-            .catch(err => console.error(err));
-    }
+        div.textContent = name;
 
-    textarea.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
+        div.style.cursor = "pointer";
 
-            const name = this.value.trim();
-            if (!name || !classId) return;
+        div.dataset.id = id;
 
-            const div = document.createElement('div');
-            div.textContent = name;
-            enteredNamesDiv.appendChild(div);
 
-            fetch('insert.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'name=' + encodeURIComponent(name) + '&class_id=' + classId
+
+        div.addEventListener("click", function () {
+
+            if (!confirm("Delete student " + name + "?"))
+                return;
+
+            fetch(
+                "delete_student.php?id=" + id
+            )
+            .then(() => {
+
+                div.remove();
+
             });
 
-            this.value = '';
-
-            // update max dynamically when adding students
-            if (groupInput) {
-                const count = document.querySelectorAll(".enteredNames div").length;
-                groupInput.max = count;
-                if (parseInt(groupInput.value) > count) {
-                    groupInput.value = count;
-                }
-            }
-        }
-    });
-
-    generateBtn.addEventListener("click", function () {
-
-        const nameElements = document.querySelectorAll(".enteredNames div");
-        let names = Array.from(nameElements).map(el => el.textContent);
-
-        let groupCount = parseInt(groupInput.value);
-
-        if (!groupCount || names.length === 0) return;
-
-        // LIMIT: max groups = number of students
-        if (groupCount > names.length) {
-            groupCount = names.length;
-            groupInput.value = names.length;
-        }
-
-        names.sort(() => Math.random() - 0.5);
-
-        let groups = Array.from({ length: groupCount }, () => []);
-
-        names.forEach((name, i) => {
-            groups[i % groupCount].push(name);
         });
 
-        sessionStorage.setItem("groups", JSON.stringify(groups));
 
-        window.location.href = "groups.php";
-    });
+
+        enteredNamesDiv.appendChild(div);
+
+    }
+
+
+
+    if (classId) {
+
+        fetch(
+            'get_names.php?class_id=' + classId
+        )
+        .then(r => r.json())
+        .then(names => {
+
+            enteredNamesDiv.innerHTML = "";
+
+            names.forEach(student => {
+
+                createStudentElement(
+                    student.name,
+                    student.id
+                );
+
+            });
+
+        });
+
+    }
+
+
+
+    textarea.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                const name =
+                    this.value.trim();
+
+                if (!name || !classId) return;
+
+
+
+                fetch('insert.php', {
+
+                    method: 'POST',
+
+                    headers: {
+                        'Content-Type':
+                        'application/x-www-form-urlencoded'
+                    },
+
+                    body:
+                        'name=' +
+                        encodeURIComponent(name) +
+                        '&class_id=' +
+                        classId
+
+                })
+                .then(r => r.json())
+                .then(data => {
+
+                    createStudentElement(
+                        name,
+                        data.id
+                    );
+
+                });
+
+
+
+                this.value = '';
+
+            }
+
+        });
+
+
+
+    groupInput.addEventListener(
+        "input",
+        function () {
+
+            const count =
+                document.querySelectorAll(
+                    ".enteredNames div"
+                ).length;
+
+            if (this.value > count) {
+
+                this.value = count;
+
+            }
+
+        });
+
+
+
+    generateBtn.addEventListener(
+        "click",
+        function () {
+
+            const nameElements =
+                document.querySelectorAll(
+                    ".enteredNames div"
+                );
+
+            let names =
+                Array.from(nameElements)
+                .map(el => el.textContent);
+
+
+
+            let groupCount =
+                parseInt(groupInput.value);
+
+
+
+            if (!groupCount ||
+                names.length === 0)
+                return;
+
+
+
+            if (groupCount > names.length) {
+
+                groupCount = names.length;
+
+            }
+
+
+
+            names.sort(() =>
+                Math.random() - 0.5
+            );
+
+
+
+            let groups =
+                Array.from(
+                    { length: groupCount },
+                    () => []
+                );
+
+
+
+            names.forEach((name, i) => {
+
+                groups[
+                    i % groupCount
+                ].push(name);
+
+            });
+
+
+
+            sessionStorage.setItem(
+                "groups",
+                JSON.stringify(groups)
+            );
+
+
+
+            window.location.href =
+                "group.php";
+
+        });
 
 });
