@@ -217,6 +217,8 @@ button:hover {
 
     min-width: 200px;
 
+    overflow-x: hidden;
+
 }
 
 /* Responsive layout */
