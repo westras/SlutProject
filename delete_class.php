@@ -11,7 +11,14 @@ $id = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
 
 if ($id > 0) {
 
-    $stmt = $conn->prepare("DELETE FROM students WHERE id = ?");
+    // delete students first
+    $stmt = $conn->prepare("DELETE FROM students WHERE class_id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+
+    // then delete class
+    $stmt = $conn->prepare("DELETE FROM classes WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
@@ -20,4 +27,5 @@ if ($id > 0) {
 }
 
 $conn->close();
+
 ?>

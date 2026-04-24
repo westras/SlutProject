@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1F3E57;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.box {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #E6EDF2;
+    color: #000;
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid #000;
+}
+
+.class-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    background: #F4F7FA;
+    border: 1px solid #000;
+}
+
+.class-row button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+
+.class-row a button {
+    background: #2F6F95;
+    color: #fff;
+}
+
+.class-row a button:hover {
+    background: #245A78;
+}
+
+.delete-class-btn {
+    background: #c94b4b;
+    color: white;
+}
+
+.delete-class-btn:hover {
+    background: #a83c3c;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+form input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #000;
+}
+
+form button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #2F6F95;
+    color: white;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #245A78;
+}
