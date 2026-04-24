@@ -202,23 +202,14 @@ button:hover {
 }
 
 .groupBox {
-
     flex: 0 0 calc(33.33% - 14px);
-
     background: #F4F7FA;
-
     border: 2px solid #000;
-
     border-radius: 10px;
-
     padding: 10px;
-
     color: #000;
-
     min-width: 200px;
-
     overflow-x: hidden;
-
 }
 
 /* Responsive layout */
