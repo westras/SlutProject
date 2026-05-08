@@ -11,13 +11,13 @@ $id = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
 
 if ($id > 0) {
 
-    // delete students first
+    // döda studenter först
     $stmt = $conn->prepare("DELETE FROM students WHERE class_id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
 
-    // then delete class
+    // och sedan klassen
     $stmt = $conn->prepare("DELETE FROM classes WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();

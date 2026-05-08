@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($row = $result->fetch_assoc()) {
 
-        // TEMP password check (we hash later)
         if ($password == $row["password"]) {
 
             $_SESSION["user_id"] = $row["id"];
