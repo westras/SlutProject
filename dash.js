@@ -5,4 +5,4 @@ function deleteClass(id) {
     fetch("delete_class.php?id=" + id)
         .then(() => location.reload());
 
-}
+} 
